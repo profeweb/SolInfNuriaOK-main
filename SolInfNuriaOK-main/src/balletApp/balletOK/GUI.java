@@ -197,6 +197,9 @@ public class GUI {
                 String message = "Seguro que quieres borrar esta lista?";
 
 
+                String nombreCalentamiento;
+
+
     public GUI(PApplet p5, DataBase db){
 
         this.db = db;
@@ -321,8 +324,9 @@ public class GUI {
         inf = db.getInfoTaulaFavoritos("nuriafemeniass");
         t1.setData(inf);
         t1.setColumnWidths(colWidths);
-        t2 = new PagedTable(filess, columness);
-        t2.setHeaders(headerss);
+        t2 = new PagedTable(filess, 3);
+        String[] headersTusCanciones = {"Orden", "Lista", "Título"};
+        t2.setHeaders(headersTusCanciones);
         inff = db.getInfoTaulaTusCanciones("nuriafemeniass");
         t2.setData(inff);
         t2.setColumnWidths(colWidths);
@@ -603,8 +607,8 @@ public class GUI {
         p5.background(231, 224, 218);
         dibujaFullMenu(p5);
             p5.fill(31, 27, 31); p5.textSize(20);
-            p5.text("Barra", 400, 75);
-        b13.display(p5);
+            p5.text(this.nombreCalentamiento, 400, 75);
+        //b13.display(p5);
         b27.display(p5);
         pl1.display(p5);
     }

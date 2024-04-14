@@ -1,9 +1,12 @@
 package balletApp.balletOK;
 
 import balletApp.balletOK.gui.DataBase;
+import balletApp.balletOK.gui.PagedLists;
 import balletApp.balletOK.gui.PagedTable;
 import balletApp.balletOK.gui.TusListasCard;
 import processing.core.PApplet;
+
+import static balletApp.balletOK.Mides.*;
 
 public class Ballet extends PApplet {
 
@@ -30,12 +33,18 @@ public class Ballet extends PApplet {
 
         gui = new GUI(this, db);
 
+        /*
         println("-----------");
         String[][] infoFavs = db.getInfoTaulaFavoritos();
         db.printArray2d(infoFavs);
         println("-----------");
         infoFavs = db.getInfoTaulaFavoritos("nuriafemeniass");
         db.printArray2d(infoFavs);
+        println("-----------");
+        infoFavs = db.getInfoListasCategoria("nuriafemeniass", "Calentamiento");
+        db.printArray2d(infoFavs);
+
+         */
     }
 
     public void draw() {
@@ -424,15 +433,32 @@ public class Ballet extends PApplet {
             }
             // Botón Barra
             else if(gui.b21.mouseOverButton(this)){
-                gui.pantallaActual = GUI.PANTALLA.TusListas;
+                gui.pantallaActual = GUI.PANTALLA.Barra;
+                gui.nombreCalentamiento = "BARRA";
+                gui.pl1 = new PagedLists(this, gui.numCardsPage2, -10+menuWidth+margeH, margeV+60, gui.cardsW, gui.cardsH);
+                String[][] infoBarra = db.getInfoListasCategoria("nuriafemeniass", "Barra");
+                gui.pl1.setData(infoBarra);
+                gui.pl1.setCards(this);
             }
             // Botón Centro
             else if(gui.b22.mouseOverButton(this)){
-                gui.pantallaActual = GUI.PANTALLA.TusListas;
+                gui.pantallaActual = GUI.PANTALLA.Barra;
+                gui.nombreCalentamiento = "CENTRO";
+                gui.pl1 = new PagedLists(this, gui.numCardsPage2, -10+menuWidth+margeH, margeV+60, gui.cardsW, gui.cardsH);
+                String[][] infoCentro= db.getInfoListasCategoria("nuriafemeniass", "Centro");
+                gui.pl1.setData(infoCentro);
+                gui.pl1.setCards(this);
+
             }
             // Boton Diagonal
             else if(gui.b23.mouseOverButton(this)){
-                gui.pantallaActual = GUI.PANTALLA.TusListas;
+                gui.pantallaActual = GUI.PANTALLA.Barra;
+                gui.nombreCalentamiento = "DIAGONAL";
+                gui.pl1 = new PagedLists(this, gui.numCardsPage2, -10+menuWidth+margeH, margeV+60, gui.cardsW, gui.cardsH);
+                String[][] infoDiagonal= db.getInfoListasCategoria("nuriafemeniass", "Diagonal");
+                gui.pl1.setData(infoDiagonal);
+                gui.pl1.setCards(this);
+
             }
             // Botón Agregar Lista
             else if(gui.b27.mouseOverButton(this)){
@@ -441,8 +467,16 @@ public class Ballet extends PApplet {
 
         }
 
-        // Clicks sobre Pantalla BARRA /////////////////////////////////////////////////////////////
+        // Clicks sobre Pantalla BARRA, CENTRO, DIAGONAL /////////////////////////////////////////////////////////////
         else if (gui.pantallaActual == GUI.PANTALLA.Barra) {
+            // Boton TuCuenta
+            if(gui.b3.mouseOverButton(this)){
+                gui.pantallaActual = GUI.PANTALLA.Favoritos;
+            }
+            // Boton Canciones
+            else if(gui.b4.mouseOverButton(this)){
+                gui.pantallaActual = GUI.PANTALLA.Canciones;
+            }
             // Botons del PagedList pl1
             gui.pl1.checkButtons(this);
         }
