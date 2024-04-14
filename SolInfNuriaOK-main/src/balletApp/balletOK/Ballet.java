@@ -1,9 +1,6 @@
 package balletApp.balletOK;
 
-import balletApp.balletOK.gui.DataBase;
-import balletApp.balletOK.gui.PagedLists;
-import balletApp.balletOK.gui.PagedTable;
-import balletApp.balletOK.gui.TusListasCard;
+import balletApp.balletOK.gui.*;
 import processing.core.PApplet;
 
 import static balletApp.balletOK.Mides.*;
@@ -262,6 +259,12 @@ public class Ballet extends PApplet {
         // Clicks sobre Pantalla TUS LISTAS /////////////////////////////////////////////////////////////
 
         else if (gui.pantallaActual == GUI.PANTALLA.TusListas) {
+
+            // Click sobre alguna card
+            if(!gui.confirml.isVisible()) {
+                gui.cardSeleccionada = gui.ptl1.checkCardClick(this);
+            }
+
             // Boton TuCuenta
             if(gui.b3.mouseOverButton(this)){
                 gui.pantallaActual = GUI.PANTALLA.Favoritos;
@@ -274,6 +277,10 @@ public class Ballet extends PApplet {
             else if(gui.confirml.isVisible()  && gui.confirml.bAceptar.mouseOverButton(this)){
                 String titulo = gui.cardSeleccionada.getTitle();
                 db.deleteInfoTaulaLista(titulo);
+                gui.ptl1 = new PagedTusListas(this, gui.numCardsPage2, -10+menuWidth+margeH, margeV+60, gui.cardsW, gui.cardsH);
+                String[][]inf3 = db.getInfoTaulaTusListas("nuriafemeniass");
+                gui.ptl1.setData(inf3);
+                gui.ptl1.setCards(this, gui.iconoP);
                 gui.confirml.setVisible(false);
             }
             //  Botón Cancelar del Confirm
@@ -549,9 +556,6 @@ public class Ballet extends PApplet {
             }
         }
 
-
-
-
         else if (gui.pantallaActual == GUI.PANTALLA.TusCanciones) {
             if (gui.t2b1.mouseOverButton(this) && gui.t2b1.isEnabled()) {
                 gui.t2.nextPage();
@@ -559,9 +563,6 @@ public class Ballet extends PApplet {
                 gui.t2.prevPage();
             }
         }
-
-
-
 
         if (gui.rb2.mouseOverButton(this)) {
             println("HAS FET CLIC SOBRE EL BOTÓ RB1");
@@ -609,18 +610,6 @@ public class Ballet extends PApplet {
     }
 
 
-    // Modifica el color segons Select 1
-    void updateColor(){
-        if(gui.s1.getSelectedValue().equals("RED")){
-            gui.bgColor = color(255, 0, 0);
-        }
-        else if(gui.s1.getSelectedValue().equals("GREEN")){
-            gui.bgColor = color(0, 255, 0);
-        }
-        else if(gui.s1.getSelectedValue().equals("BLUE")){
-            gui.bgColor = color(0, 0, 255);
-        }
-    }
     static void updateCursor(PApplet p5) {
         if (gui.b.mouseOverButton(p5) || gui.tList.mouseOverButtons(p5)) {
             p5.cursor(HAND);

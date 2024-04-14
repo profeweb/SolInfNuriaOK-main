@@ -369,14 +369,6 @@ public class GUI {
         // Paged tus Listas
         ptl1 = new PagedTusListas(p5, numCardsPage2, -10+menuWidth+margeH, margeV+60, cardsW, cardsH);
         inf3 = db.getInfoTaulaTusListas("nuriafemeniass");
-
-        System.out.println("\nCONTINGUT INF3: ");
-        for(int i=0; i<inf3.length; i++){
-            for(int j=0; j<inf3[i].length; j++){
-                System.out.print(inf3[i][j] + "\t");
-            }
-            System.out.println();
-        }
         ptl1.setData(inf3);
         ptl1.setCards(p5, iconoP);
 
