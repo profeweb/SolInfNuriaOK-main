@@ -115,6 +115,28 @@ public class DataBase {
         }
     }
 
+    // Retorna les dades d'una taula en concret
+    public String[] getNombresListas(String nomUsuario){
+        String qn = "SELECT COUNT(*) AS n FROM lista l, usuario u WHERE  l.Usuario = u.nombre AND l.Usuario = '"+nomUsuario+"' ";
+        int numFiles = getNumRowsQuery(qn);
+        String[] info = new String[numFiles];
+        try {
+            String q = "SELECT l.título AS TITULO FROM lista l, usuario u WHERE l.Usuario = u.nombre AND l.Usuario = '"+nomUsuario+"' ORDER BY TITULO ASC";
+
+            ResultSet rs = query.executeQuery(q);
+            int nr = 0;
+            while (rs.next()) {
+                info[nr] = rs.getString("TITULO");
+                nr++;
+            }
+            return info;
+        }
+        catch(Exception e) {
+            System.out.println(e);
+            return null;
+        }
+    }
+
     public String[][] getInfoTaulaCanciones(String nomUsuario){
         int numFiles = getNumRowsTaula("canción");
         int numCols  = 4;
@@ -407,5 +429,31 @@ public class DataBase {
             }
             System.out.println();
         }
+    }
+
+    public void printArray1d(String[] array){
+        for(int i=0; i<array.length; i++){
+            System.out.println(array[i]);
+        }
+    }
+
+    // Conversiones entre fechas
+
+    public String formataFechaEsp(String fechaEntrada){
+
+        String y = fechaEntrada.split("-")[0];
+        String m = fechaEntrada.split("-")[1];
+        String d = fechaEntrada.split("-")[2];
+
+        return d+"/"+m+"/"+y;
+    }
+
+    public String formataFechaEng(String fechaEntrada){
+
+        String y = fechaEntrada.split("/")[2];
+        String m = fechaEntrada.split("/")[1];
+        String d = fechaEntrada.split("/")[0];
+
+        return y+"-"+m+"-"+d;
     }
 }

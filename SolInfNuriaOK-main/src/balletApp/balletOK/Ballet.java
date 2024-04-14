@@ -42,6 +42,9 @@ public class Ballet extends PApplet {
         db.printArray2d(infoFavs);
 
          */
+
+        String[] infoFavs = db.getNombresListas("nuriafemeniass");
+        db.printArray1d(infoFavs);
     }
 
     public void draw() {
@@ -394,11 +397,20 @@ public class Ballet extends PApplet {
             }
             //Botón Guardar
             else if(gui.b29.mouseOverButton(this)) {
+
                 String titulo = gui.tf6.text;
-                String dia = gui.c.getSelectedDate();
-                String categoria = gui.s1.getSelectedValue();
-                String favoritos = gui.sb1.toString();
-                db.insertCancion(titulo, dia, categoria, favoritos);
+                String dia = db.formataFechaEng(gui.c.getSelectedDate());
+                String lista = gui.s2.getSelectedValue();
+                String favoritos = gui.sb1.isEnabled() ? "1" : "0";
+                db.insertCancion(titulo, dia, lista, favoritos);
+
+                // Ara que s'ha creat una cançó cal actualitzar FAVORITOS
+                gui.t1 = new PagedTable(gui.files, gui.columnes);
+                gui.t1.setHeaders(gui.headers);
+                String[][] inf = db.getInfoTaulaFavoritos("nuriafemeniass");
+                gui.t1.setData(inf);
+                gui.t1.setColumnWidths(gui.colWidths);
+
             }
             // Select Categoria
             else  if(gui.s1.mouseOverSelect(this)){
@@ -414,6 +426,10 @@ public class Ballet extends PApplet {
                 }
                 gui.s2.toggle();        // Plegar o desplegar
             }
+            // Favoritos
+            else if(gui.sb1.mouseOverButton(this)){
+                gui.sb1.toggle();
+            }
             // Botón Volver
             else if(gui.b9.mouseOverButton(this)){
                 gui.pantallaActual = GUI.PANTALLA.TusCanciones;
@@ -425,6 +441,8 @@ public class Ballet extends PApplet {
             // Textfields
             gui.tf6.isPressed(this);
             gui.tf66.isPressed(this);
+
+
         }
 
         // Clicks sobre Pantalla CALENTAMIENTO /////////////////////////////////////////////////////////////

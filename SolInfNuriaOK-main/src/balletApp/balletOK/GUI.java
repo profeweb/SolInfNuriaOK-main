@@ -342,7 +342,9 @@ public class GUI {
 
         // Creació dels Select
         s1 = new Select(selectValues, 400, 100+2*30+20+30+10, selectW, selectH);
-        s2 = new Select(selectValues, 400, 210+selectH+60+10, selectW, selectH);
+
+        String[] nombresListas = db.getNombresListas("nuriafemeniass");
+        s2 = new Select(nombresListas, 400, 210+selectH+60+10, selectW, selectH);
         s3 = new Select(selectValues, 400+selectW+75, 100+2*30+20+30+10+70, selectW, selectH);
 
 
@@ -510,7 +512,7 @@ public class GUI {
              */
             p5.fill(31, 27, 31); p5.textSize(20);
             p5.text("Seleccionar categoría", 400, 100+2*30+20+30);
-        s1.display(p5);
+
         b9.display(p5);
         p5.fill(31, 27, 31); p5.textSize(20);
         p5.text("Seleccionar fecha actual", 400+selectW+65+8, 100+2*30+85-23);
@@ -518,6 +520,7 @@ public class GUI {
             p5.fill(31, 27, 31); p5.textSize(20);
             p5.text("Seleccionar lista", 400, 210+selectH+60);
         s2.display(p5);
+        s1.display(p5);
         b29.display(p5);
     }
 
