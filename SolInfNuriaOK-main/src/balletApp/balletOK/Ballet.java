@@ -46,6 +46,8 @@ public class Ballet extends PApplet {
 
          */
 
+        String[][] infoCanciones = db.getInfoCancionesCategoria("nuriafemeniass", "Barra");
+        db.printArray2d(infoCanciones);
 
     }
 
