@@ -41,10 +41,12 @@ public class Ballet extends PApplet {
         infoFavs = db.getInfoListasCategoria("nuriafemeniass", "Calentamiento");
         db.printArray2d(infoFavs);
 
-         */
-
         String[] infoFavs = db.getNombresListas("nuriafemeniass");
         db.printArray1d(infoFavs);
+
+         */
+
+
     }
 
     public void draw() {
@@ -300,6 +302,7 @@ public class Ballet extends PApplet {
                 String tituloLista = tlcSelecccionada.getTitle();
                 System.out.println("LISTA SELECCIONADA: "+ tituloLista);
                 String[][] infoCanciones = gui.db.getInfoCancionesLista(tituloLista);
+                db.printArray2d(infoCanciones);
                 System.out.println("NUM CANCIOnES LISTA: "+infoCanciones.length);
                 gui.pantallaActual = GUI.PANTALLA.cancionesTusListas;
 
