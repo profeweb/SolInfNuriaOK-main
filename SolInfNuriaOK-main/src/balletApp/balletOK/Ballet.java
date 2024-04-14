@@ -300,6 +300,7 @@ public class Ballet extends PApplet {
             else if(gui.ptl1.numCardOver(this)!= -1){
                 TusListasCard tlcSelecccionada = gui.ptl1.checkCardClick(this);
                 String tituloLista = tlcSelecccionada.getTitle();
+                gui.tituloLista = tituloLista;
                 System.out.println("LISTA SELECCIONADA: "+ tituloLista);
                 String[][] infoCanciones = gui.db.getInfoCancionesLista(tituloLista);
                 db.printArray2d(infoCanciones);

@@ -197,7 +197,7 @@ public class GUI {
                 String message = "Seguro que quieres borrar esta lista?";
 
 
-                String nombreCalentamiento;
+                String nombreCalentamiento, tituloLista;
 
 
     public GUI(PApplet p5, DataBase db){
@@ -539,11 +539,11 @@ public class GUI {
         p5.background(231, 224, 218);
         dibujaFullMenu(p5);
             p5.fill(31, 27, 31); p5.textSize(20);
-            p5.text("Título de la lista", 400, 75);
+            p5.text(tituloLista, 400, 75);
         dibujaBotonsTuCuentaRB(p5);
         b5.display(p5);
         //b10.display(p5);
-        ptSongsList.display(p5, 100, 100, 400, 500);
+        ptSongsList.display(p5, 400, 100, 600, 400);
     }
 
     public void dibujaPantallaAgregarLista(PApplet p5){
