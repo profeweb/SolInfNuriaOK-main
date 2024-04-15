@@ -534,7 +534,14 @@ public class Ballet extends PApplet {
         else if (gui.pantallaActual == GUI.PANTALLA.ListaCanciones) {
             // Botons del PagedSong ps1
             gui.ps1.checkButtons(this);
+
             gui.cs = gui.ps1.checkCardClick(this);
+            if(gui.cs != null){
+                println(gui.cs.getTitle());
+                String tituloCancion = gui.cs.getTitle() +".mp3";
+                gui.mp.setSound(this, tituloCancion);
+                gui.pantallaActual = GUI.PANTALLA.Reproductor;
+            }
         }
 
         // Clicks sobre Pantalla REPRODUCTOR /////////////////////////////////////////////////////////////

@@ -1,7 +1,8 @@
 package balletApp.balletOK.gui;
 
 import processing.core.PApplet;
-import processing.sound.*;
+import processing.sound.SoundFile;
+
 
 public class MusicPlayer {
 
@@ -28,6 +29,7 @@ public class MusicPlayer {
 
     // Setter del so del reproductor
     public void setSound(PApplet p5, String s){
+        p5.println(s);
         sTitle = s;
         so = new SoundFile(p5, s);
     }
