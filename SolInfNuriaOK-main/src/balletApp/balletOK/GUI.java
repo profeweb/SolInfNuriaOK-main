@@ -613,7 +613,7 @@ public class GUI {
         dibujaFullMenu(p5);
             p5.fill(31, 27, 31); p5.textSize(20);
             p5.text("Variaciones", 400, 65);
-        b13.display(p5);
+        //b13.display(p5);
         b27.display(p5);
     }
 
@@ -622,7 +622,7 @@ public class GUI {
         dibujaFullMenu(p5);
             p5.fill(31, 27, 31); p5.textSize(20);
             p5.text("Título de la lista", 400, 75);
-        b13.display(p5);
+        ////b13.display(p5);
         b27.display(p5);
         ps1.display(p5);
     }

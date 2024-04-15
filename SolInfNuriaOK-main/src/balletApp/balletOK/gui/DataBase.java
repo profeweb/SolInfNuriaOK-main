@@ -67,6 +67,7 @@ public class DataBase {
 
     public int getNumRowsQuery(String q){
         try {
+            System.out.println(q);
             ResultSet rs = query.executeQuery( q);
             rs.next();
             return rs.getInt("n");
@@ -365,6 +366,40 @@ public class DataBase {
             return null;
         }
     }
+
+
+    public String[][] getCancionesLista(String nomUsuario, String nomLista){
+        String qn = "SELECT COUNT(*) AS n " +
+                " FROM canción c, lista l,  usuario u " +
+                " WHERE c.Lista_título=l.título AND l.Usuario= u.nombre " +
+                "  AND u.nombre='"+nomUsuario+"' AND l.título='"+nomLista+"' ";
+            int numFiles = getNumRowsQuery(qn);
+            int numCols  = 4;
+            String[][] info = new String[numFiles][numCols];
+            try {
+                String q = "SELECT c.título AS TITULO, c.día AS DIA, c.Lista_título AS LISTA, c.orden AS ORDEN, c.favorito AS FAVORITO " +
+                        " FROM canción c, lista l,  usuario u " +
+                        " WHERE c.Lista_título=l.título AND l.Usuario= u.nombre " +
+                        "  AND u.nombre='"+nomUsuario+"' AND l.título='"+nomLista+"' " +
+                        " ORDER BY c.título ASC";
+                System.out.println(q);
+                ResultSet rs = query.executeQuery( q);
+                int nr = 0;
+                while (rs.next()) {
+                    info[nr][0] = String.valueOf(nr+1);
+                    info[nr][1] = rs.getString("TITULO");
+                    info[nr][2] = rs.getString("LISTA");
+                    info[nr][3] = rs.getString("FAVORITO");
+                    nr++;
+                }
+                return info;
+            }
+            catch(Exception e) {
+                System.out.println(e);
+                return null;
+            }
+        }
+
 
 
     // Retorna les dades de la columna NOM de la taula UNITAT

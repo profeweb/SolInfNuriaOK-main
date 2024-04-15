@@ -44,10 +44,16 @@ public class Ballet extends PApplet {
         String[] infoFavs = db.getNombresListas("nuriafemeniass");
         db.printArray1d(infoFavs);
 
-         */
+
 
         String[][] infoCanciones = db.getInfoCancionesCategoria("nuriafemeniass", "Barra");
         db.printArray2d(infoCanciones);
+
+
+         */
+
+        String[][] inf = db.getCancionesLista("nuriafemeniass", "Warm up");
+        db.printArray2d(inf);
 
     }
 
@@ -510,6 +516,17 @@ public class Ballet extends PApplet {
             }
             // Botons del PagedList pl1
             gui.pl1.checkButtons(this);
+
+            ListCard lcs = gui.pl1.checkCardClick(this);
+            if (lcs != null){
+                String tituloLista = lcs.getTitle();
+                println(tituloLista);
+                gui.pantallaActual = GUI.PANTALLA.ListaCanciones;
+                gui.ps1 = new PagedSongs(this, gui.numCardsPage, -10+menuWidth+margeH, margeV+60, gui.cardsW, gui.cardsH);
+                String[][] inf = db.getCancionesLista("nuriafemeniass", tituloLista);
+                gui.ps1.setData(inf);
+                gui.ps1.setCards(this, gui.imgFave, gui.imgNoFave, gui.imgPlay);
+            }
         }
 
         // Clicks sobre Pantalla LISTA CANCIONES /////////////////////////////////////////////////////////////
